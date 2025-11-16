@@ -1,0 +1,27 @@
+/* Basic styling for D&D 3.5e SRD sheets */
+.dnd35-sheet {
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  color: #eaeaea;
+  background: linear-gradient(180deg, #222 0%, #161616 100%);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.dnd35-sheet .abilities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.dnd35-sheet .ability {
+  background: rgba(255,255,255,0.03);
+  padding: 6px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.dnd35-sheet button.roll-ability {
+  margin-top: 6px;
+  width: 100%;
+}

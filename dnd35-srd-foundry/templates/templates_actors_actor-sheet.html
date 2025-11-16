@@ -1,0 +1,76 @@
+<div class="dnd35-sheet">
+  <header class="sheet-header">
+    <h1>{{name}}</h1>
+    <div class="attributes">
+      <div><strong>{{i18n "DND35SRD.Init"}}:</strong> <input name="data.init" type="number" value="{{data.init}}"></div>
+      <div><strong>{{i18n "DND35SRD.HP"}}:</strong> <input name="data.hp" type="number" value="{{data.hp}}"></div>
+      <div><strong>{{i18n "DND35SRD.AC"}}:</strong> <input name="data.ac" type="number" value="{{data.ac}}"></div>
+    </div>
+  </header>
+
+  <nav class="sheet-tabs">
+    <a class="item active" data-tab="attributes">Attributes</a>
+    <a class="item" data-tab="skills">Skills</a>
+    <a class="item" data-tab="inventory">Inventory</a>
+  </nav>
+
+  <section class="sheet-body">
+    <div class="tab attributes" style="display:block">
+      <h2>Abilities</h2>
+      <div class="abilities">
+        {{#each data.abilities}}
+          <div class="ability">
+            <div class="label">{{@key}}</div>
+            <div><input name="data.abilities.{{@key}}.value" type="number" value="{{value}}"></div>
+            <div>mod <input name="data.abilities.{{@key}}.mod" type="number" value="{{mod}}"></div>
+            <button class="ability-roll" data-ability="{{@key}}">{{i18n "DND35SRD.Abilities.@key"}} Roll</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="tab skills" style="display:none">
+      <h2>Skills</h2>
+      <table class="skills-list">
+        <thead><tr><th>Skill</th><th>Mod</th><th></th></tr></thead>
+        <tbody>
+        {{#each data.skills}}
+          <tr>
+            <td>{{@key}}</td>
+            <td><input name="data.skills.{{@key}}.mod" type="number" value="{{mod}}"></td>
+            <td><button class="skill-roll" data-skill="{{@key}}">Roll</button></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+      <button type="button" data-action="add-skill">Add Skill</button>
+    </div>
+
+    <div class="tab inventory" style="display:none">
+      <h2>Inventory</h2>
+      <div class="items-list">
+        {{#each items}}
+          <div class="item">
+            <h3>{{name}}</h3>
+            <div>{{data.description}}</div>
+            <button class="attack-roll" data-name="{{name}}" data-mod="{{data.attackMod}}">Attack Roll</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Minimal tab switching (client-side)
+  document.addEventListener('click', function(ev) {
+    const tab = ev.target.closest('.sheet-tabs .item');
+    if (!tab) return;
+    ev.preventDefault();
+    const parent = tab.closest('.dnd35-sheet');
+    parent.querySelectorAll('.sheet-tabs .item').forEach(it => it.classList.remove('active'));
+    tab.classList.add('active');
+    const tabName = tab.dataset.tab;
+    parent.querySelectorAll('.sheet-body .tab').forEach(t => t.style.display = (t.classList.contains(tabName) ? 'block' : 'none'));
+  });
+</script>

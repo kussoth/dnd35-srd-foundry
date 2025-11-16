@@ -1,0 +1,28 @@
+<div class="dnd35-sheet item-sheet">
+  <header>
+    <h1>{{name}}</h1>
+    <div class="item-type">{{type}}</div>
+  </header>
+
+  <section class="content">
+    <div class="description">
+      <textarea name="data.description">{{data.description}}</textarea>
+    </div>
+
+    <div class="details">
+      {{#if_eq type "weapon"}}
+        <div><label>Damage: <input name="data.damage" value="{{data.damage}}"></label></div>
+        <div><label>Attack Bonus: <input name="data.attackMod" value="{{data.attackMod}}"></label></div>
+      {{/if_eq}}
+
+      {{#if_eq type "spell"}}
+        <div><label>Level: <input name="data.level" value="{{data.level}}"></label></div>
+        <div><label>School: <input name="data.school" value="{{data.school}}"></label></div>
+      {{/if_eq}}
+    </div>
+
+    <div class="actions">
+      <button class="item-to-chat">Post to Chat</button>
+    </div>
+  </section>
+</div>
